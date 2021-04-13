@@ -1,6 +1,16 @@
 <#
-This deletes all resource groups and their childern
-CMT 12-April-2021
+This creates a lab to play with
+CMT 13-April-2021
 #>
 
-$resourcegroupids = get-azresourcegroup * get-az
+#Create a resource group
+New-AzResourceGroup -Name "Lab-1" -Location                   
+#Create VNets
+
+#Create VMs
+
+#Add locks
+
+#Create Bastion Host
+
+

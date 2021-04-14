@@ -13,8 +13,8 @@ New-AzVirtualNetwork -Name "Michael" -Location 'East US' -ResourceGroupName "Lab
 #Create Subnets
 New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.0.0.0/24" -Name "Chad-0" -
 
-#Create VMs
-New-AzVM -Name "Chad-VM" -
+#Create VMs   
+New-AzVM -Name "Chad-VM" -AddressPrefix
 
 
 #Add locks

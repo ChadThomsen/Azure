@@ -11,17 +11,18 @@ New-AzResourceGroup -Name $rgname -Location 'East US'
 $PubIP = New-AzPublicIpAddress -Name "Public-IP" -ResourceGroupName $rgname `
     -Location "eastus2" -Sku "Standard" -IdleTimeoutInMinutes 4 -AllocationMethod "static"
 
-#Create VNets
-New-AzVirtualNetwork -Name "Chad" -Location 'East US' -ResourceGroupName $rgname -AddressPrefix "10.0.0.0/16"
-New-AzVirtualNetwork -Name "Michael" -Location 'East US' -ResourceGroupName $rgname -AddressPrefix "10.1.0.0/16"
-
 #Create Subnets
 $chadsub = New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.0.0.0/24" -Name "Chad"
 $michaelsub = New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.0.0.0/24" -Name "Michael" 
 
+#Create Network Security Group and Rules
+
+#Create VNets and apply NSGs
+New-AzVirtualNetwork -Name "Chad" -Location 'East US' -ResourceGroupName $rgname -AddressPrefix "10.0.0.0/16"
+New-AzVirtualNetwork -Name "Michael" -Location 'East US' -ResourceGroupName $rgname -AddressPrefix "10.1.0.0/16"
+
 #Create VMs   
 #New-AzVM -Name "Chad-VM" -AddressPrefix  
-
 
 #Add locks
 

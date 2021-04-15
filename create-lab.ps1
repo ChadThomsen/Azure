@@ -1,25 +1,28 @@
 <#
 This creates a lab to play with
 CMT 13-April-2021
+
+Why is "networkwatcher east-us" created? Is this done automatically?
 #>
 $rgname = "Lab-1"
+$location = "East US"
 
 #Create a resource group
-New-AzResourceGroup -Name $rgname -Location 'East US'
+New-AzResourceGroup -Name $rgname -Location $location
 
 #Create Public IPs
 $PubIP = New-AzPublicIpAddress -Name "Public-IP" -ResourceGroupName $rgname `
-    -Location "eastus2" -Sku "Standard" -IdleTimeoutInMinutes 4 -AllocationMethod "static"
+    -Location $location -Sku "Standard" -IdleTimeoutInMinutes 4 -AllocationMethod "static"
 
 #Create Subnets
-$chadsub = New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.0.0.0/24" -Name "Chad"
-$michaelsub = New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.0.0.0/24" -Name "Michael" 
+$chadsub = New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.0.0.0/24" -Name "Chad" 
+$michaelsub = New-AzVirtualNetworkSubnetConfig -AddressPrefix "10.1.0.0/24" -Name "Michael" 
 
 #Create Network Security Group and Rules
 
 #Create VNets and apply NSGs
-New-AzVirtualNetwork -Name "Chad" -Location 'East US' -ResourceGroupName $rgname -AddressPrefix "10.0.0.0/16"
-New-AzVirtualNetwork -Name "Michael" -Location 'East US' -ResourceGroupName $rgname -AddressPrefix "10.1.0.0/16"
+New-AzVirtualNetwork -Name "Chad" -Location $location -ResourceGroupName $rgname -AddressPrefix "10.0.0.0/16"
+New-AzVirtualNetwork -Name "Michael" -Location $location -ResourceGroupName $rgname -AddressPrefix "10.1.0.0/16"
 
 #Create VMs   
 #New-AzVM -Name "Chad-VM" -AddressPrefix  

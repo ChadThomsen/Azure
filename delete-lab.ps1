@@ -8,6 +8,6 @@ CMT 13-APR-2021
 $resourcegroups = Get-AzResourceGroup
 foreach($resourcegroup in $resourcegroups){
    if($resourcegroup.ResourceGroupName -ne "Diagnostics"){
-       remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force
+       remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force -Verbose
    }
 }

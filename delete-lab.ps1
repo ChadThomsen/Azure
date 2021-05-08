@@ -11,3 +11,4 @@ foreach($resourcegroup in $resourcegroups){
        remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force -Verbose
    }
 }
+write-host "All resourced deleted form Azure."

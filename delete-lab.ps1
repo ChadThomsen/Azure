@@ -5,10 +5,22 @@ Paramaterize this and add a compouter shutdown option?
 CMT 13-APR-2021
 #>
 
+$keepresouregroup = "Tools"
+$keeplock = Get-AzResourceLock | Where-Object {$_.name -contains "Tools"}
+
+#Find and remove locks.
+$locks = Get-AzResourceLock 
+foreach($lock in $locks){
+    if($lock -ne $keeplock){
+        Remove-AzResourceLock -Lockid $lock.Lockid -Force
+    }
+}
+
+#Remove resoruce groups and all child items in the groups.
 $resourcegroups = Get-AzResourceGroup
 foreach($resourcegroup in $resourcegroups){
-   if($resourcegroup.ResourceGroupName -ne "Diagnostics"){
-       remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force -Verbose
+   if($resourcegroup.ResourceGroupName -ne $keepresouregroup){
+       remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force -Verbose 
    }
 }
 write-host "All resourced deleted form Azure."

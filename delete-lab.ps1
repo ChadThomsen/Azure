@@ -23,4 +23,4 @@ foreach($resourcegroup in $resourcegroups){
        remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force -Verbose 
    }
 }
-write-host "All resourced deleted from Azure."
+write-host "All resources have been deleted from Azure."

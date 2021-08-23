@@ -16,11 +16,19 @@ foreach($lock in $locks){
     }
 }
 
-#Remove resoruce groups and all child items in the groups.
+#Remove resource groups and all child items in the groups.
 $resourcegroups = Get-AzResourceGroup
 foreach($resourcegroup in $resourcegroups){
    if($resourcegroup.ResourceGroupName -ne $keepresouregroup){
        remove-azresourcegroup -Name $resourcegroup.ResourceGroupName -Force -Verbose 
    }
 }
+
+#Delete File Sync
+    #Does the sync service exist? 
+        #Unregister server
+        #Delete Cloud Server endpoint. 
+        #Delete sync group
+        #Delete Storage Sync Services
+
 write-host "All resources have been deleted from Azure."
